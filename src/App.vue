@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <stepper :steps="steps" :currentStep="currentStep" :setStep="setStep"/>
+    <stepper :steps="steps" :currentStep="currentStep" :setStep="setStep" labelPosition="top"/>
     <step-one v-if= "currentStep == 0"/>
     <step-two v-if= "currentStep == 1"/>
     <step-three v-if= "currentStep == 2"/>
