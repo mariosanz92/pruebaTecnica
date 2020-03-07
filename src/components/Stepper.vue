@@ -18,8 +18,8 @@
         <span class="step-dot">{{ stepIndex }}</span>
       </li>
     </ol>
-    <!-- <button @click="prevStep">prev step</button> -->
-    <button @click="nextStep" :disabled="disableNextButton">next step</button>
+    <button class="step-button" @click="prevStep" :disabled="disablePrevButton">previous step</button>
+    <button class="step-button" @click="nextStep" :disabled="disableNextButton">next step</button>
   </div>
 </template>
 
@@ -49,12 +49,21 @@ export default {
     nextStep() {
       const nextStep = this.currentStep + 1;
       this.setStep(nextStep);
+    },
+
+    prevStep() {
+      const prevStep = this.currentStep - 1;
+      this.setStep(prevStep);
     }
   },
 
   computed: {
     disableNextButton() {
       return this.currentStep === this.steps.length - 1;
+    },
+
+    disablePrevButton() {
+      return this.currentStep === 0;
     }
   },
 
@@ -161,6 +170,10 @@ $label-color-inactive: #99a4ac;
     cursor: pointer;
   }
 
+  .step-label:not(.active){ // TODO: Como aplicar media query a esta clase?
+    display:unset
+  }
+
   .step-label--top {
     top: -$label-height;
   }
@@ -177,8 +190,15 @@ $label-color-inactive: #99a4ac;
   .step:not(.active) .step-label {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    @media(max-width: 767px){
+      display:none
+    }
   }
 }
+  .step-button {
+    border: 1px solid #DDD;
+    background-color: #EFEFEF;
+  }
 
 button + button {
   margin-left: 1rem;

@@ -1,26 +1,25 @@
 <template>
   <div id="app">
-    <stepper :steps="steps" :currentStep="currentStep" :setStep="setStep" labelPosition="top"/>
-    <step-one v-if= "currentStep == 0"/>
-    <step-two v-if= "currentStep == 1"/>
-    <step-three v-if= "currentStep == 2"/>
-    <step-four v-if= "currentStep == 3"/>
-    <step-five v-if= "currentStep == 4"/>
-
+    <stepper :steps="steps" :currentStep="currentStep" :setStep="setStep" labelPosition="top" />
+    <step-one v-if="currentStep == 0" />
+    <step-two v-if="currentStep == 1" />
+    <step-three v-if="currentStep == 2" />
+    <step-four v-if="currentStep == 3" />
+    <step-five v-if="currentStep == 4" />
   </div>
 </template>
 
 <script>
-import Stepper from '@/components/Stepper'
-import StepOne from '@/components/StepOne'
-import StepTwo from '@/components/StepTwo'
-import StepThree from '@/components/StepThree'
-import StepFour from '@/components/StepFour'
-import StepFive from '@/components/StepFive'
-
+import Stepper from "@/components/Stepper";
+import StepOne from "@/components/StepOne";
+import StepTwo from "@/components/StepTwo";
+import StepThree from "@/components/StepThree";
+import StepFour from "@/components/StepFour";
+import StepFive from "@/components/StepFive";
+import Order from "@/services/order";
 
 export default {
-  name: 'app',
+  name: "app",
 
   components: {
     Stepper,
@@ -28,32 +27,37 @@ export default {
     StepTwo,
     StepThree,
     StepFour,
-    StepFive,
-
-
+    StepFive
   },
-  methods:{
-    setStep(step){
-      this.currentStep = step
+  methods: {
+    setStep(step) {
+      this.currentStep = step;
     },
+
+    async getOrders() {
+      const service = new Order();
+      const orders = service.getOrders();
+      console.log(await orders)
+    }
   },
 
-
-  data () {
+  data() {
     return {
       steps: [
-        { name: 'Components', },
-        { name: 'CSS styles', },
-        { name: 'API request', },
-        { name: 'New feature', },
-        { name: 'Tests', },
+        { name: "Components" },
+        { name: "CSS styles" },
+        { name: "API request" },
+        { name: "New feature" },
+        { name: "Tests" }
       ],
-     currentStep: 0
-    }
-      
-  }
+      currentStep: 0
+    };
+  },
 
-}
+  mounted() {
+    this.getOrders();
+  }
+};
 </script>
 
 <style lang="scss">
@@ -61,7 +65,7 @@ body {
   margin: 0;
 }
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -93,7 +97,7 @@ hr {
 p {
   width: 100%;
   text-align: left;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 img {
   width: 100%;
@@ -110,18 +114,19 @@ img {
   width: fit-content;
 }
 .doc-box {
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   padding: 1rem;
-  background-color: #EFEFEF;
+  background-color: #efefef;
   margin: 2rem 0;
 }
 .exercise {
   padding-bottom: 1rem;
   margin-bottom: 1rem;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid #ddd;
 
-  ul, ol {
-    margin: .5em 0;
+  ul,
+  ol {
+    margin: 0.5em 0;
     text-align: left;
   }
 }
@@ -133,9 +138,8 @@ img {
 
 .info {
   margin-top: 1rem;
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   padding: 0.5rem 1rem;
-  background-color: #EFEFEF;
+  background-color: #efefef;
 }
-
 </style>
