@@ -15,7 +15,7 @@
                     'step-label--bottom': labelPosition === 'bottom',
                     'step-label--top': labelPosition === 'top'}"
         >{{ step.name }}</span>
-        <span class="step-dot">{{ stepIndex }}</span>
+        <span @click="goToStep(stepIndex)" class="step-dot">{{ stepIndex }}</span>
       </li>
     </ol>
     <button class="step-button" @click="prevStep" :disabled="disablePrevButton">previous step</button>
@@ -54,6 +54,12 @@ export default {
     prevStep() {
       const prevStep = this.currentStep - 1;
       this.setStep(prevStep);
+    },
+    
+    goToStep(step) {
+      if (step < this.currentStep) {
+        this.setStep(step);
+      }
     }
   },
 
@@ -170,8 +176,9 @@ $label-color-inactive: #99a4ac;
     cursor: pointer;
   }
 
-  .step-label:not(.active){ // TODO: Como aplicar media query a esta clase?
-    display:unset
+  .step-label:not(.active) {
+    // TODO: Como aplicar media query a esta clase?
+    display: unset;
   }
 
   .step-label--top {
@@ -190,15 +197,15 @@ $label-color-inactive: #99a4ac;
   .step:not(.active) .step-label {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @media(max-width: 767px){
-      display:none
+    @media (max-width: 767px) {
+      display: none;
     }
   }
 }
-  .step-button {
-    border: 1px solid #DDD;
-    background-color: #EFEFEF;
-  }
+.step-button {
+  border: 1px solid #ddd;
+  background-color: #efefef;
+}
 
 button + button {
   margin-left: 1rem;
