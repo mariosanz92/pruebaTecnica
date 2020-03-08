@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Orders from '@/components/Orders'
+import OrderDetails from '@/components/OrderDetails'
+
 
 Vue.use(Router)
 
@@ -11,7 +13,7 @@ export default new Router({
   routes: [
     {
       path: '/orders',
-      name: 'Orders',
+      name: 'orders',
       component: Orders
     },
     {
@@ -19,6 +21,10 @@ export default new Router({
       name: 'home',
       component: Home
     },
-
+    {
+      path: '/orders/:id',
+      name: 'orderDetails',
+      component: OrderDetails
+    }
   ]
 })
