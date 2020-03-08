@@ -15,11 +15,11 @@
                     'step-label--bottom': labelPosition === 'bottom',
                     'step-label--top': labelPosition === 'top'}"
         >{{ step.name }}</span>
-        <span @click="goToStep(stepIndex)" class="step-dot">{{ stepIndex }}</span>
+        <span @click="goToPreviousStep(stepIndex)" class="step-dot">{{ stepIndex }}</span>
       </li>
     </ol>
-    <button class="step-button" @click="prevStep" :disabled="disablePrevButton">previous step</button>
-    <button class="step-button" @click="nextStep" :disabled="disableNextButton">next step</button>
+    <button class="step-button"  @click="prevStep" :disabled="disablePrevButton">previous step</button>
+    <button class="step-button"  @click="nextStep" :disabled="disableNextButton">next step</button>
   </div>
 </template>
 
@@ -36,30 +36,18 @@ export default {
       type: Array,
       required: true
     },
-    setStep: {
+    nextStep: {
+      type: Function
+    },
+    goToPreviousStep: {
+      type: Function
+    },
+    prevStep: {
       type: Function
     },
     labelPosition: {
       type: String, //TODO: mirar como tipar esto para que sea bottom o top
       default: "bottom"
-    }
-  },
-
-  methods: {
-    nextStep() {
-      const nextStep = this.currentStep + 1;
-      this.setStep(nextStep);
-    },
-
-    prevStep() {
-      const prevStep = this.currentStep - 1;
-      this.setStep(prevStep);
-    },
-    
-    goToStep(step) {
-      if (step < this.currentStep) {
-        this.setStep(step);
-      }
     }
   },
 
