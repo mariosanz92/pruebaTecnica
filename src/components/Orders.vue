@@ -3,15 +3,13 @@
     <h1 class="title-text--align">INFORMACIÓN DE TUS PEDIDOS</h1>
     <hr />
     <ul class="list-order">
-      <li v-for="(order) in this.orders" :key="order.id">
+      <li v-for="order in this.orders" :key="order.id">
         <span>Pedido nº: {{ order.code }}</span>
-
         <br />
         <span>Fecha del pedido:{{ order.orderDate }}</span>
         <router-link :to="{ name: 'orderDetails', params: { id: order.id }}">
           <button class="button-order-detail">VER PEDIDO</button>
         </router-link>
-
         <hr />
       </li>
     </ul>
@@ -39,7 +37,6 @@ export default {
 
   async mounted() {
     await this.getOrders();
-    console.log(this.orders);
   }
 };
 </script>

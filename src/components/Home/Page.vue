@@ -16,13 +16,13 @@
   </div>
 </template>
 <script>
-import Stepper from "./Stepper";
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
-import StepThree from "./StepThree";
-import StepFour from "./StepFour";
-import StepFive from "./StepFive";
-import Order from "../services/order"
+import Stepper from "./Stepper/Stepper";
+import StepOne from "./Stepper/StepOne";
+import StepTwo from "./Stepper/StepTwo";
+import StepThree from "./Stepper/StepThree";
+import StepFour from "./Stepper/StepFour";
+import StepFive from "./Stepper/StepFive";
+import Order from "@/services/order"
 
 export default {
   name: "home",
@@ -44,7 +44,6 @@ export default {
     async getOrders() {
       const service = new Order();
       const orders = service.getOrders();
-      console.log(await orders);
     },
 
     nextStep() {
