@@ -74,7 +74,7 @@ export default {
         if (event.keyCode == 37) {
           this.prevStep();
         }
-      }) //charla demi contextos JS
+      }) 
     }
   },
 
