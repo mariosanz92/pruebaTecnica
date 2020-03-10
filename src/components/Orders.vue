@@ -1,18 +1,18 @@
 <template>
   <div class="orders">
-    <h1 class="orders-title">INFORMACIÓN DE TUS PEDIDOS</h1>
+    <h1 class="orders-title">INFORMACIÓN DE TUS PEDIDOS</h1> 
     <hr class="title-separator" />
     <ul class="orders-list">
       <li class="order-item" v-for="order in this.orders" :key="order.id">
         <div class="order-item-container">
-          <img class="order-item_icon"  :src="order.image" />
+          <img class="order-item_icon" :src="order.image" />
           <div>
-          <h1 class="order-item_code">Pedido nº: {{ order.code }}</h1>
-          <span class="order-item_date">Fecha del pedido:{{ order.orderDate }}</span>
+            <h1 class="order-item_code">Pedido nº: {{ order.code }}</h1>
+            <span class="order-item_date">Fecha del pedido:{{ order.orderDate }}</span>
           </div>
         </div>
         <router-link :to="{ name: 'orderDetails', params: { id: order.id }}">
-          <button class="order-item_details">VER PEDIDO</button>
+          <button class="order-item_details" :id="order.id">VER PEDIDO</button>
         </router-link>
       </li>
     </ul>
@@ -42,7 +42,7 @@ export default {
       orders: [],
       image: {
         "PICKUP-DELIVERY": require("@/assets/truck.png"),
-        "LOCAL": require("@/assets/deliver.png")
+        LOCAL: require("@/assets/deliver.png")
       }
     };
   },
@@ -84,14 +84,13 @@ export default {
   padding-bottom: 20px;
 }
 
-.order-item-container{
+.order-item-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
-.order-item_icon{
+.order-item_icon {
   width: 50px;
   border: none;
   margin-right: 20px;

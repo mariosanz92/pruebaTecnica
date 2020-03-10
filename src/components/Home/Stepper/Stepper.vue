@@ -18,8 +18,8 @@
         <span @click="goToPreviousStep(stepIndex)" class="step-dot">{{ stepIndex }}</span>
       </li>
     </ol>
-    <button class="step-button"  @click="prevStep" :disabled="disablePrevButton">previous step</button>
-    <button class="step-button"  @click="nextStep" :disabled="disableNextButton">next step</button>
+    <button class="step-button" id="previous-step-button" @click="prevStep" :disabled="disablePrevButton">← Previous step</button>
+    <button class="step-button" id="next-step-button" @click="nextStep" :disabled="disableNextButton">Next step →</button>
   </div>
 </template>
 
@@ -193,6 +193,10 @@ $label-color-inactive: #99a4ac;
 .step-button {
   border: 1px solid #ddd;
   background-color: #efefef;
+  padding: 10px 10px;
+  &:hover{
+    cursor:pointer;
+  }
 }
 
 button + button {
