@@ -15,6 +15,7 @@
     <step-five v-if="currentStep == 4" />
   </div>
 </template>
+
 <script>
 import Stepper from "./Stepper/Stepper";
 import StepOne from "./Stepper/StepOne";
@@ -22,11 +23,10 @@ import StepTwo from "./Stepper/StepTwo";
 import StepThree from "./Stepper/StepThree";
 import StepFour from "./Stepper/StepFour";
 import StepFive from "./Stepper/StepFive";
-import Order from "@/services/order"
+import Order from "@/services/order";
 
 export default {
   name: "home",
-
   components: {
     Stepper,
     StepOne,
@@ -40,44 +40,38 @@ export default {
     setStep(step) {
       this.currentStep = step;
     },
-
     async getOrders() {
       const service = new Order();
       const orders = service.getOrders();
     },
-
     nextStep() {
       if (this.currentStep < 4) {
         const nextStep = this.currentStep + 1;
         this.setStep(nextStep);
       }
     },
-
     prevStep() {
       if (this.currentStep > 0) {
         const prevStep = this.currentStep - 1;
         this.setStep(prevStep);
       }
     },
-
     goToPreviousStep(step) {
       if (step < this.currentStep) {
         this.setStep(step);
       }
     },
-
     handleKeyPress() {
-      window.addEventListener("keyup", event => {
-        if (event.keyCode == 39) {
+      window.addEventListener("keydown", event => {
+        if (event.key == "ArrowRight") {
           this.nextStep();
         }
-        if (event.keyCode == 37) {
+        if (event.key == "ArrowLeft") {
           this.prevStep();
         }
-      }) 
+      });
     }
   },
-
   data() {
     return {
       steps: [
@@ -90,7 +84,6 @@ export default {
       currentStep: 0
     };
   },
-
   mounted() {
     this.getOrders();
     this.handleKeyPress();
@@ -99,9 +92,11 @@ export default {
 </script>
 
 <style lang="scss">
+
 body {
   margin: 0;
 }
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -122,10 +117,12 @@ body {
   align-items: center;
   max-width: 600px;
 }
+
 .links {
   margin-bottom: 2rem;
   margin-top: 1rem;
 }
+
 hr {
   width: 100%;
   margin-top: 4rem;
@@ -137,11 +134,13 @@ p {
   text-align: left;
   margin: 0.5rem 0;
 }
+
 img {
   width: 100%;
   border: 1px solid black;
   margin-top: 1rem;
 }
+
 .code {
   text-align: left;
   font-family: monospace;
@@ -151,12 +150,14 @@ img {
   margin: 1rem auto;
   width: fit-content;
 }
+
 .doc-box {
   border: 1px solid #ddd;
   padding: 1rem;
   background-color: #efefef;
   margin: 2rem 0;
 }
+
 .exercise {
   padding-bottom: 1rem;
   margin-bottom: 1rem;

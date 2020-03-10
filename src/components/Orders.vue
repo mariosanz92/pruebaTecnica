@@ -1,6 +1,6 @@
 <template>
   <div class="orders">
-    <h1 class="orders-title">INFORMACIÓN DE TUS PEDIDOS</h1> 
+    <h1 class="orders-title">INFORMACIÓN DE TUS PEDIDOS</h1>
     <hr class="title-separator" />
     <ul class="orders-list">
       <li class="order-item" v-for="order in this.orders" :key="order.id">
@@ -12,18 +12,18 @@
           </div>
         </div>
         <router-link :to="{ name: 'orderDetails', params: { id: order.id }}">
-          <button class="order-item_details" :id="order.id">VER PEDIDO</button>
+          <button class="order-item_details">VER PEDIDO</button>
         </router-link>
       </li>
     </ul>
   </div>
 </template>
+
 <script>
 import Order from "../services/order";
 
 export default {
   name: "orders",
-
   methods: {
     async getOrders() {
       const service = new Order();
@@ -46,7 +46,6 @@ export default {
       }
     };
   },
-
   async mounted() {
     await this.getOrders();
     await this.setImagesInOrders();

@@ -1,7 +1,7 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('steps pages', () => {
-  it('it works the happy path', () => {
+describe('Stepper', () => {
+  it('happy path', () => {
     goToSpepperPage()
     expect(isDisabledPreviousStep()).to.eq(true)
     expect(isInFirstStep()).to.eq(true)
@@ -24,84 +24,91 @@ describe('steps pages', () => {
     expect(isInFirstStep()).to.eq(true)
   })
 
-
-  it('it goes to order details', () => {
-    goToOrderPage()
-    isInOrderPage()
-    clickOnDetailOrder()
-    isInPageOrderDetails()
-    clickOnBackButton()
+  it('navigate to next step using right arrow key', () => {
+    goToSpepperPage()
+    pressRightKey()
+    step(1).should('have.class', 'active')
   })
 
-  function clickOnBackButton(){
+  it('navigate previous step using left arrow key', () => {
+    goToSpepperPage()
+    pressRightKey()
+    step(1).should('have.class', 'active')
+    pressLeftKey()
+    step(1).should('not.have.class', 'active')
+  })
+
+  it('navigate to a previous step by clicking on it' , () => {
+    goToSpepperPage()
+    pressRightKey()
+    pressRightKey()
+    pressRightKey()
+    step(3).should('have.class', 'active')
+    step(2).click()
+    step(3).should('not.have.class', 'active')
+  })
+})
+
+  const step = (number = 0) => {
+    return cy.get('.step').eq(number)
+  }
+
+  const pressRightKey = () => {
+    cy.get('body').trigger("keydown", {key: "ArrowRight"})
+  }
+
+  const pressLeftKey = () => {
+    cy.get('body').trigger("keydown", {key: "ArrowLeft"})
+  }
+
+  const clickOnBackButton = () => {
     cy.get('#BACK').click()
     return true
   }
 
-  function isInOrderPage(){
-    cy.contains('INFORMACIÓN DE TUS PEDIDOS')
-  }
-
-  function clickOnDetailOrder(){
-    cy.get('#e29f59ab-2793-4644-bec5-5818fd67a165').click()
-    return true
-  }
-
-  function isInPageOrderDetails(){
-    cy.contains('total price: 14500')
-  }
-
-
-  function goToOrderPage(){
-    cy.visit('/orders')
-  }
-
-
-  function goToSpepperPage(){
+  const goToSpepperPage = () => {
     cy.visit('/')
   }
 
-  function moveToPreviousStep() {
+  const moveToPreviousStep = () => {
     cy.get('#previous-step-button').click()
   }
 
-  function isInFifthStep(){
+  const isInFifthStep = () => {
     cy.contains('Task 5 - Tests')
     return true
   }  
 
-  function isInFourthyStep(){
+  const isInFourthyStep = () => {
     cy.contains('Task 4 - A new feature')
     return true
   }
 
-  function isInThirdStep(){
+  const isInThirdStep = () => {
     cy.contains('Task 3a - API Request')
     return true
   }
 
-  function isInSecondStep(){
+  const isInSecondStep = () => {
     cy.contains('Task 2a - Styles')
     return true
   }
 
-  function isInFirstStep(){
+  const isInFirstStep = () => {
     cy.contains('Task 1a - Bug')
     return true
   }
 
-  function isDisabledPreviousStep(){
+  const isDisabledPreviousStep = () => {
     cy.get('#previous-step-button').should('be.disabled')
     return true
   }
 
-  function moveToNextStep() {
+  const moveToNextStep = () => {
     cy.get('#next-step-button').click()
   }
 
-  function isDisabledNextStep(){
+  const isDisabledNextStep = () => {
     cy.get('#next-step-button').should('be.disabled')
     return true
   }
-
-})

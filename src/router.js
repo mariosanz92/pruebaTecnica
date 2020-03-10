@@ -4,7 +4,6 @@ import Home from '@/components/Home/Page'
 import Orders from '@/components/Orders'
 import OrderDetails from '@/components/OrderDetails'
 
-
 Vue.use(Router)
 
 export default new Router({

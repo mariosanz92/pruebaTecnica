@@ -18,15 +18,24 @@
         <span @click="goToPreviousStep(stepIndex)" class="step-dot">{{ stepIndex }}</span>
       </li>
     </ol>
-    <button class="step-button" id="previous-step-button" @click="prevStep" :disabled="disablePrevButton">← Previous step</button>
-    <button class="step-button" id="next-step-button" @click="nextStep" :disabled="disableNextButton">Next step →</button>
+    <button
+      class="step-button"
+      id="previous-step-button"
+      @click="prevStep"
+      :disabled="disablePrevButton"
+    >← Previous step</button>
+    <button
+      class="step-button"
+      id="next-step-button"
+      @click="nextStep"
+      :disabled="disableNextButton"
+    >Next step →</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "stepper",
-
   props: {
     currentStep: {
       type: Number,
@@ -46,7 +55,7 @@ export default {
       type: Function
     },
     labelPosition: {
-      type: String, //TODO: mirar como tipar esto para que sea bottom o top
+      type: String, 
       default: "bottom"
     }
   },
@@ -55,12 +64,10 @@ export default {
     disableNextButton() {
       return this.currentStep === this.steps.length - 1;
     },
-
     disablePrevButton() {
       return this.currentStep === 0;
     }
   },
-
   data() {
     return {};
   }
@@ -165,7 +172,6 @@ $label-color-inactive: #99a4ac;
   }
 
   .step-label:not(.active) {
-    // TODO: Como aplicar media query a esta clase?
     display: unset;
   }
 
@@ -190,12 +196,13 @@ $label-color-inactive: #99a4ac;
     }
   }
 }
+
 .step-button {
   border: 1px solid #ddd;
   background-color: #efefef;
   padding: 10px 10px;
-  &:hover{
-    cursor:pointer;
+  &:hover {
+    cursor: pointer;
   }
 }
 
