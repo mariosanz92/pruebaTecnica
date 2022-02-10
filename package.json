@@ -9,7 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nvm": "0.0.4",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
